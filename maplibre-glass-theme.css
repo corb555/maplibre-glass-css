@@ -1,16 +1,11 @@
 /*
  * MapLibre Glass Theme
  * A modern, frosted-glass UI theme for MapLibre GL JS.
- *
- * Usage: Add the class "maplibre-glass-theme" to your main map container.
- * <div id="map" class="maplibre-glass-theme"></div>
  */
 
 .maplibre-glass-theme {
     /* --- Configuration Variables --- */
-    /* Override these in your own CSS to change the flavor */
-
-    /* YOUR CUSTOM COLORS PRESERVED */
+    /* Override these in your own CSS to change the style */
     --glass-bg-color: rgba(0, 9, 14, 0.2);
     --glass-border-color: rgba(255, 255, 255, 0.4);
     --glass-blur: blur(4px);
@@ -33,7 +28,6 @@
 /* ==========================================================================
    1. Base Glass Mixin (Applied to controls)
    ========================================================================== */
-/* FIX: Added Attribution Compact Button to this list so it gets the glow/blur */
 .maplibre-glass-theme .glass-panel,
 .maplibre-glass-theme .maplibregl-ctrl-group button,
 .maplibre-glass-theme .maplibregl-ctrl-geocoder,
@@ -96,7 +90,7 @@
 
 /* Expanded Box */
 .maplibre-glass-theme .maplibregl-ctrl-attrib {
-    /* We define specific background here because expanded attrib shouldn't necessarily have the button shadow */
+    /* We define specific background here because expanded attrib shouldn't  have the button shadow */
     background: var(--glass-bg-color);
     backdrop-filter: var(--glass-blur);
     border-radius: 1rem;
@@ -112,7 +106,7 @@
 }
 
 /* Collapsed Button Container */
-/* Note: Material styles (blur, glow) are handled by the Mixin in Section 1 now */
+/* Note: Material styles (blur, glow) are handled by the Mixin in Section 1  */
 .maplibre-glass-theme .maplibregl-ctrl-attrib.maplibregl-compact {
     padding: 0;
     margin: 10px 10px 30px 10px; /* Lift it up slightly so it doesn't hit bottom edge */
@@ -148,7 +142,7 @@
 }
 
 /* ==========================================================================
-   4. Geocoder Plugin (If installed)
+   4. Geocoder Plugin
    ========================================================================== */
 .maplibre-glass-theme .maplibregl-ctrl-geocoder {
     border-radius: var(--glass-radius-large);
@@ -170,7 +164,7 @@
     filter: var(--glass-icon-filter);
 }
 
-/* Suggestions Dropdown */
+/*  Dropdown List */
 .maplibre-glass-theme .suggestions-wrapper .suggestions {
     background-color: var(--glass-bg-color);
     backdrop-filter: blur(10px);
@@ -222,7 +216,7 @@
 
 
 /* ==========================================================================
-   6. Tour Control (For maplibre-gl-tour plugin)
+   6. Tour Control ( maplibre-gl-tour plugin)
    ========================================================================== */
 .maplibre-glass-theme .maplibregl-ctrl-tour {
     display: flex;

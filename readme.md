@@ -11,9 +11,8 @@ semi-transparent interface.
 ## Features
 
 *   **Frosted Glass Effect:** Uses blur(), transparency, highlights and shadows for a high quality effect.
+*   **Simple to Use:** Just import the CSS and add a class to your map container.
 *   **Fully Customizable:** Colors, blur amounts, and border radius are controlled via CSS Variables.
-*   **Zero JavaScript Config:** Just import the CSS and add a class to your map container.
-*   **Scoped Styling:** Uses a specific root class (`.maplibre-theme-glass`) so it won't conflict with other UI elements.
 
 ## Supported controls
 
@@ -30,18 +29,14 @@ semi-transparent interface.
 
 ## Usage
 
-### 1. Include the CSS
-Add the stylesheet to your project.
+### 1. Add the stylesheet to your project.
 
 ```html
 <link href="maplibre-theme-glass.css" rel="stylesheet" />
 ```
-
-### 2. Add the Class
-Add the `maplibre-theme-glass` class to your map container `<div>`.
+### 2. Add the `maplibre-theme-glass` class to your map container `<div>`.
 
 ```html
-<!-- Just add the class! -->
 <div id="map" class="maplibre-theme-glass"></div>
 ```
 
@@ -51,7 +46,7 @@ Initialize your map and add controls as usual.
 ```javascript
 const map = new maplibregl.Map({ container: 'map', ... });
 
-// The theme automatically styles these:
+// The theme will automatically style these:
 map.addControl(new maplibregl.NavigationControl());
 map.addControl(new MaplibreGeocoder(api, { maplibregl }));
 ```
@@ -70,11 +65,6 @@ You can override the CSS variables in your own stylesheet to match your preferen
     --glass-radius-small: 4px; /* Square buttons */
 }
 ```
-
-## Compatibility
-
-Works on all modern browsers (Chrome, Safari, Firefox, Edge) across Desktop, iOS, and Android.
-Negligible impact on map rendering performance.
 
 ## License
 
