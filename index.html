@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+This is a standalone demo of the maplibre glass css
+It loads a standard  map  and adds some standard
+controls  to demonstrate the glass styling.
+
+**Note:** Ensure `maplibre-glass-theme.css` is in the same folder as this file.
+-->
+
+<head>
+    <title>MapLibre Glass Theme Demo</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 1. MapLibre GL JS -->
+    <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css' />
+    <script src='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js'></script>
+
+    <!-- 2. MapLibre Geocoder  -->
+    <script src="https://unpkg.com/@maplibre/maplibre-gl-geocoder@1.5.0/dist/maplibre-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@maplibre/maplibre-gl-geocoder@1.5.0/dist/maplibre-gl-geocoder.css" />
+
+    <!-- 3. The Glass Theme -->
+    <link href="maplibre-glass-theme.css" rel="stylesheet" />
+
+    <style>
+        body { margin: 0; padding: 0; background: #111; }
+        html, body, #map { height: 100%; }
+    </style>
+</head>
+<body>
+
+<!--
+  USAGE: add the class "maplibre-glass-theme" to your map container.
+-->
+<div id="map" class="maplibre-glass-theme"></div>
+
+<script>
+    // Initialize Map
+    const map = new maplibregl.Map({
+        container: 'map',
+        style: 'https://tiles.openfreemap.org/styles/bright',
+        center: [-74.006, 40.7128],
+        zoom: 13,
+        pitch: 45,
+        bearing: -17
+    });
+
+    map.on('load', () => {
+
+        // 1. Add Geocoder (Top Left)
+        // The theme automatically detects and styles this
+        const geocoder_api = {
+            forwardGeocode: async (config) => {
+                const features = [];
+                try {
+                    let request =
+                        'https://nominatim.openstreetmap.org/search?q=' +
+                        config.query +
+                        '&format=geojson&polygon_geojson=1&addressdetails=1';
+                    const response = await fetch(request);
+                    const geojson = await response.json();
+                    for (let feature of geojson.features) {
+                        let center = [
+                            feature.bbox[0] +
+                            (feature.bbox[2] - feature.bbox[0]) / 2,
+                            feature.bbox[1] +
+                            (feature.bbox[3] - feature.bbox[1]) / 2
+                        ];
+                        let point = {
+                            type: 'Feature',
+                            geometry: {
+                                type: 'Point',
+                                coordinates: center
+                            },
+                            place_name: feature.properties.display_name,
+                            properties: feature.properties,
+                            text: feature.properties.display_name,
+                            place_type: ['place'],
+                            center: center
+                        };
+                        features.push(point);
+                    }
+                } catch (e) {
+                    console.error(`Failed to forwardGeocode with error: ${e}`);
+                }
+
+                return {
+                    features: features
+                };
+            }
+        };
+        map.addControl(
+            new MaplibreGeocoder(geocoder_api, {
+                maplibregl: maplibregl,
+                placeholder: "Search Glass UI..."
+            }),
+            'top-left'
+        );
+
+        // 2. Add Standard Navigation (Top Right)
+        // The theme turns these into floating glass circles
+        map.addControl(new maplibregl.NavigationControl({
+            visualizePitch: true,
+            showZoom: true,
+            showCompass: true
+        }), 'top-right');
+
+        // 3. Add Geolocate (Top Right)
+        map.addControl(new maplibregl.GeolocateControl({
+            positionOptions: { enableHighAccuracy: true },
+            trackUserLocation: true
+        }), 'top-right');
+
+        // 4. Add a Popup example
+        // The theme styles the content, the tip, and the close button
+        new maplibregl.Popup({ closeOnClick: false })
+            .setLngLat([-74.006, 40.7128])
+            .setHTML('<h3>Glass UI</h3><p>Transparent, frosted, and clean.</p>')
+            .addTo(map);
+    });
+</script>
+</body>
+</html>
