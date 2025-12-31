@@ -32,12 +32,12 @@ semi-transparent interface.
 ### 1. Add the stylesheet to your project.
 
 ```html
-<link href="maplibre-theme-glass.css" rel="stylesheet" />
+<link href="maplibre-glass-theme.css" rel="stylesheet" />
 ```
-### 2. Add the `maplibre-theme-glass` class to your map container `<div>`.
+### 2. Add the `maplibre-glass-theme` class to your map container `<div>`.
 
 ```html
-<div id="map" class="maplibre-theme-glass"></div>
+<div id="map" class="maplibre-glass-theme"></div>
 ```
 
 ### 3. Initialize Map Normally
@@ -56,7 +56,7 @@ map.addControl(new MaplibreGeocoder(api, { maplibregl }));
 You can override the CSS variables in your own stylesheet to match your preference.
 
 ```css
-.maplibre-theme-glass {
+.maplibre-glass-theme {
     /* Example: Change to a "White Frost" look */
     --glass-bg-color: rgba(255, 255, 255, 0.7);
     --glass-text-color: #333;
