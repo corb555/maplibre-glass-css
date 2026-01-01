@@ -12,13 +12,13 @@
 
     /* --- 1. CORE SETTINGS (Applied to Buttons & Controls) --- */
     --glass-rgb: 0, 9, 14;        /* Base RGB - blue/green tint to the glass */
-    --glass-opacity: 0.2;        /* glass opacity */
+    --glass-opacity: 0.2;         /* glass opacity */
     --glass-blur-px: 2px;         /* background blur */
 
     --glass-border-color: rgba(255, 255, 255, 0.3);
     --glass-text-color: #f4f1f1;
     --glass-text-muted: rgba(255, 255, 255, 0.7);
-    --glass-accent-color: #b0b4f6;
+    --glass-accent-color: #4c4770;
 
     /* Popup style  */
     --glass-popup-rgb: var(--glass-rgb);
